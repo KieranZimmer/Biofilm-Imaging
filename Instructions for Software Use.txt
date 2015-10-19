@@ -1,0 +1,41 @@
+To use the program first one must write an info file, containing information the program needs to run effectively.
+
+All lines of the info file will contain one number followed by a new line.
+
+The 0th line contains the name you want for the output file.
+The 1st line contains the length of 1 pixel in microns in the x direction.
+The 2nd line contains the length of 1 pixel in microns in the y direction.
+The 3rd line contains the length of 1 pixel in microns in the z direction.
+The 4th line contains the width of the tubing interior in pixels.
+The 5th line contains the height of the tubing interior in pixels
+The 6th line contains the x coordinate of the top left hand corner of the square that fully contains the interior of the tubing.
+The 7th line contains the y coordinate of the top left hand corner of the square that fully contains the interior of the tubing.
+(These above 3 values can be obtained by opening the first image to be analysed in an editing program and drawing a 
+square around the interior of the tubing such that it is fully contained within the square, and the 4 edges intersect
+tangentially with the circumference of the tubing interior.  This should be done as precisely as possible, but these
+values are used only for error detection, not for calculating the actual output values.)
+The 8th line contains the index of the first picture to be analysed.
+The 9th line contains the index of the last picture to be analysed.
+The 10th line contains the period for producing renders of the pixels the program considered biofilm in a particular image.
+If this number is 0, renders will only be generated for images where an error might have occurred. Otherwise a render will
+be generated every x images. (Recommended ~ #images/10)  If this number is low, the program will run significantly slower.
+The 11th line contains the minimum number of adjoining pixels for a group of pixels to be considered biofilm. Based on
+data, this number is recommended at 20 (!!)
+The 12th line contains the maximum pixel brightness for the interior tubing fill algorithm.  Based on data, this number
+is recommended at 45 (!!)
+The 13th line contains the path and name of the folder containing the images to be analysed. Case sensitive. Use double
+blackslashes. 
+(eg. 'C:\\Users\\Bob\\Pictures\\Biofilm images' no quotes)
+
+The file must be called info.txt (a text file) and be included in the same directory as the program itself.
+An example info.txt file is included (Note that running the program with the example info file will very likely return
+incorrect values.)
+
+Rendered images will be primarily black and white, black pixels not being counted as biofilm, while white pixels were counted.
+A red circle will be drawn representing the walls of the tubing as given by the user in the radius/x,y coordinates.  The
+renders are designed to be used to guarantee that the program is giving an honest accounting of biofilm size.  If a render
+signifies that the program has made an error in identifying biomass areas, this can be fixed by clearly demarcating the
+wall of the tubing with thin black lines where the biofilm meets the walls of the tubing (if in doubt, a complete circle
+can be drawn separating the biofilm from the tubing walls).  If the program has identified biofilm outside the tubing interior,
+this can be clarified by drawing a WHITE line around walls of the tubing where the biofilm was identified outside the
+tubing interior.
